@@ -9,7 +9,7 @@
     cos_region: "us-south"
     cos_access_key: "8866384b40e743af8c7a6fa42302e052"
     cos_secret_key: "e70f58b4ba43aa26b1753b7ac30f9d9b34549e7de322ffe6"
-    documents_path: "{{ playbook_dir }}/../documents"
+    documents_path: "{{ playbook_dir }}/documents"
   
   tasks:
     - name: Find and upload PDF files to IBM COS
