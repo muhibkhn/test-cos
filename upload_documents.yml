@@ -4,7 +4,7 @@
   gather_facts: no
   
   vars:
-    cos_bucket: "my-unique-bucket-002"
+    cos_bucket: "{{ bucket_name }}"
     cos_endpoint: "s3.us-south.cloud-object-storage.appdomain.cloud"
     cos_region: "us-south"
     cos_access_key: "e4ecbccbd8794997a9bdf674825e6cd9"
