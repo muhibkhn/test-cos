@@ -1,0 +1,47 @@
+---
+- name: Upload PDF documents to IBM Cloud Object Storage
+  hosts: localhost
+  gather_facts: no
+  
+  vars:
+    cos_bucket: "my-unique-bucket-002"
+    cos_endpoint: "s3.us-south.cloud-object-storage.appdomain.cloud"
+    cos_region: "us-south"
+    cos_access_key: "e4ecbccbd8794997a9bdf674825e6cd9"
+    cos_secret_key: "de309c1ca3eef7a911c9aabcc1229a199ad6a50f8842b10d"
+    documents_path: "{{ playbook_dir }}/../documents"
+  
+  tasks:
+    - name: Find and upload PDF files to IBM COS
+      block:
+        - name: Find all PDFs
+          find:
+            paths: "{{ documents_path }}"
+            patterns: "*.pdf"
+          register: pdf_files
+
+        - name: Upload PDFs
+          shell: |
+            python3 << 'EOF'
+            import boto3
+            
+            s3 = boto3.client(
+                's3',
+                endpoint_url='https://{{ cos_endpoint }}',
+                aws_access_key_id='{{ cos_access_key }}',
+                aws_secret_access_key='{{ cos_secret_key }}',
+                region_name='{{ cos_region }}'
+            )
+            
+            files = {{ pdf_files.files | map(attribute='path') | list | tojson }}
+            for file_path in files:
+                file_name = file_path.split('/')[-1]
+                with open(file_path, 'rb') as f:
+                    s3.put_object(Bucket='{{ cos_bucket }}', Key=file_name, Body=f)
+                print(f"✓ Uploaded {file_name}")
+            EOF
+          register: upload_result
+
+        - name: Show results
+          debug:
+            msg: "{{ upload_result.stdout }}"
