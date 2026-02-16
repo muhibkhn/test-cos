@@ -37,7 +37,7 @@
             for file_path in files:
                 file_name = file_path.split('/')[-1]
                 with open(file_path, 'rb') as f:
-                    s3.put_object(Bucket='{{ cos_bucket }}', Key=file_name, Body=f)
+                    s3.put_object(Bucket='muhib', Key=file_name, Body=f)
                 print(f"✓ Uploaded {file_name}")
             EOF
           register: upload_result
