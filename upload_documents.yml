@@ -7,8 +7,8 @@
     cos_bucket: "{{ bucket_name }}"
     cos_endpoint: "s3.us-south.cloud-object-storage.appdomain.cloud"
     cos_region: "us-south"
-    cos_access_key: "52464a26c1534a9e80a3b58bd51dfcae"
-    cos_secret_key: "ef7e36b732f9b2b2ff8e4aae98e63e61772958cb4ab75a55"
+    cos_access_key: "55b273d3070b4595866d6b689d46d1e2"
+    cos_secret_key: "e52ea73cf98a8624631fcc52b67d77bbada2abffd410e6a9"
     documents_path: "{{ playbook_dir }}/documents"
   
   tasks:
