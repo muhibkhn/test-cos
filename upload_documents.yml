@@ -4,7 +4,7 @@
   gather_facts: no
   
   vars:
-    cos_bucket: "{{ bucket_name }}"
+    cos_bucket: "muhib"
     cos_endpoint: "s3.us-south.cloud-object-storage.appdomain.cloud"
     cos_region: "us-south"
     cos_access_key: "52464a26c1534a9e80a3b58bd51dfcae"
